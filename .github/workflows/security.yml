@@ -48,6 +48,21 @@ jobs:
           target: 'http://127.0.0.1:8089/openapi.json'
           fail_action: true
 
+  INFRA:
+    runs-on: ubuntu-latest
+    name: Infrastructure misconfig detection
+    steps:
+      - uses: actions/checkout@v2
+      - name: run kics Scan
+        uses: checkmarx/kics-github-action@v1.3
+        with:
+          path: 'terraform'
+          ignore_on_exit: results
+          output_path: myResults/
+      - name: display kics results
+        run: |
+          cat myResults/results.json
+
   SCA:
     runs-on: ubuntu-latest
     name: Dependency-Checker
