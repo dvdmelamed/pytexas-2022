@@ -103,9 +103,9 @@ jobs:
     steps:
       - uses: actions/github-script@v4
         with:
-          github-token: ${{secrets.MY_ORG_TOKEN}}
+          github-token: ${{secrets.SECRET_TOKEN}}
           script: |
-            const result = await github.orgs.listMembers({org: "jitsecurity-cto", filter: "2fa_disabled"});
+            const result = await github.orgs.listMembers({org: "Mseg14", filter: "2fa_disabled"});
             if (result['data'].length > 0) {
               result['data'].forEach(function(obj) { 
                 console.log("FAIL: " + obj['login'] + " does not have MFA enabled"); 
